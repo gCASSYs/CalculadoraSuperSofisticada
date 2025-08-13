@@ -23,3 +23,4 @@ Projeto de calculadora web completa, desenvolvida para treinar HTML, CSS e JavaS
 ## 📌 Como executar
 1. Baixe ou clone este repositório
 2. Abra o `index.html` no navegador
+3. Abra o link  https://gcassys.github.io/CalculadoraSuperSofisticada/
