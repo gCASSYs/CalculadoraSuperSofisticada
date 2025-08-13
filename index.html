@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧮 Calculadora Super Sofisticada</title>
+
+  <!-- Descrição para SEO -->
+  <meta name="description" content="Calculadora completa: padrão, científica, programador, conversor de unidades e financeira. Histórico, memória e tema claro/escuro.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+
+  <!-- Link do CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-theme="dark">
+
+  <!-- ======== CABEÇALHO ======== -->
+  <div class="container">
+    <div class="header">
+      <div class="title">
+        <div style="font-size:28px">🧮 Calculadora Super Sofisticada</div>
+        <small>Clássica • Científica • Programador • Conversor de Unidades • Financeira • Histórico • Temas</small>
+      </div>
+      <div class="controls">
+        <div class="segmented" id="angleMode">
+          <button data-mode="DEG" class="active">DEG</button>
+          <button data-mode="RAD">RAD</button>
+        </div>
+        <label class="switch">
+          <span class="small">🌙</span>
+          <input id="themeToggle" type="checkbox">
+          <span class="small">☀️</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- ======== DISPLAY ======== -->
+    <div class="row">
+      <div class="display card">
+        <div class="screen">
+          <div class="memo" id="memoryChips"></div>
+          <div class="expr" id="expr">&nbsp;</div>
+          <div class="value mono" id="value">0</div>
+        </div>
+        <div class="controls">
+          <button class="btn" id="mc">MC</button>
+          <button class="btn" id="mr">MR</button>
+          <button class="btn" id="mplus">M+</button>
+          <button class="btn" id="mminus">M-</button>
+          <button class="btn ghost" id="copy">Copiar resultado</button>
+        </div>
+      </div>
+
+      <!-- ======== TECLADOS E PAINÉIS ======== -->
+      <div class="card" style="flex:1;min-width:260px">
+        <div class="tabs" id="tabs">
+          <button data-tab="std" class="active">Padrão</button>
+          <button data-tab="sci">Científica</button>
+          <button data-tab="prog">Programador</button>
+          <button data-tab="unit">Unidades</button>
+          <button data-tab="fin">Financeira</button>
+          <button data-tab="hist">Histórico</button>
+        </div>
+
+        <!-- Painel padrão -->
+        <div class="panel active" id="panel-std">
+          <div class="pad">
+            <div class="key danger" data-k="C">C</div>
+            <div class="key danger" data-k="⌫">⌫</div>
+            <div class="key op" data-k="%">%</div>
+            <div class="key op" data-k="/">÷</div>
+            <div class="key" data-k="7">7</div>
+            <div class="key" data-k="8">8</div>
+            <div class="key" data-k="9">9</div>
+            <div class="key op" data-k="*">×</div>
+            <div class="key" data-k="4">4</div>
+            <div class="key" data-k="5">5</div>
+            <div class="key" data-k="6">6</div>
+            <div class="key op" data-k="-">−</div>
+            <div class="key" data-k="1">1</div>
+            <div class="key" data-k="2">2</div>
+            <div class="key" data-k="3">3</div>
+            <div class="key op" data-k="+">+</div>
+            <div class="key sp2" data-k="0">0</div>
+            <div class="key" data-k=",">,</div>
+            <div class="key eq" data-k="=">=</div>
+          </div>
+        </div>
+
+        <!-- Painel científica -->
+        <div class="panel" id="panel-sci">
+          <div class="section">
+            <div class="pad">
+              <div class="key" data-k="sin">sin</div>
+              <div class="key" data-k="cos">cos</div>
+              <div class="key" data-k="tan">tan</div>
+              <div class="key" data-k="π">π</div>
+              <div class="key" data-k="ln">ln</div>
+              <div class="key" data-k="log">log</div>
+              <div class="key" data-k="^">xʸ</div>
+              <div class="key" data-k="√">√</div>
+              <div class="key" data-k="e">e</div>
+              <div class="key" data-k="!">n!</div>
+              <div class="key" data-k="(">(</div>
+              <div class="key" data-k=")">)</div>
+              <div class="key op" data-k="/">÷</div>
+              <div class="key op" data-k="*">×</div>
+              <div class="key op" data-k="-">−</div>
+              <div class="key op" data-k="+">+</div>
+              <div class="key" data-k="C">C</div>
+              <div class="key" data-k="⌫">⌫</div>
+              <div class="key" data-k=",">,</div>
+              <div class="key eq" data-k="=">=</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel programador -->
+        <div class="panel" id="panel-prog">
+          <div class="section">
+            <h4>Conversor de Bases</h4>
+            <div class="grid">
+              <input id="progInput" class="input mono" placeholder="255, 0xFF, 0b1010">
+              <button class="btn" id="progParse">Converter</button>
+            </div>
+            <div class="grid">
+              <div><div class="small sub">BIN</div><div id="binOut" class="mono"></div></div>
+              <div><div class="small sub">OCT</div><div id="octOut" class="mono"></div></div>
+              <div><div class="small sub">DEC</div><div id="decOut" class="mono"></div></div>
+              <div><div class="small sub">HEX</div><div id="hexOut" class="mono"></div></div>
+            </div>
+          </div>
+          <div class="section">
+            <h4>Operações Bitwise</h4>
+            <div class="grid-3">
+              <input id="bwA" class="input mono" placeholder="A">
+              <select id="bwOp" class="input">
+                <option value="AND">AND</option>
+                <option value="OR">OR</option>
+                <option value="XOR">XOR</option>
+                <option value="NOT">NOT</option>
+                <option value="SHL">A << n</option>
+                <option value="SHR">A >> n</option>
+              </select>
+              <input id="bwB" class="input mono" placeholder="B / n">
+            </div>
+            <div class="controls" style="margin-top:8px">
+              <button class="btn" id="bwRun">Executar</button>
+              <div class="small mono" id="bwResult"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel unidades -->
+        <div class="panel" id="panel-unit">
+          <div class="section">
+            <h4>Conversor de Unidades</h4>
+            <div class="grid">
+              <select id="unitCat" class="input">
+                <option value="length">Comprimento</option>
+                <option value="mass">Massa</option>
+                <option value="temp">Temperatura</option>
+              </select>
+              <span></span>
+              <input id="unitFromVal" class="input" type="number" placeholder="Valor">
+              <span></span>
+              <select id="unitFrom" class="input"></select>
+              <select id="unitTo" class="input"></select>
+            </div>
+            <div class="controls">
+              <button class="btn" id="unitSwap">Trocar</button>
+              <div id="unitOut" class="mono"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel financeira -->
+        <div class="panel" id="panel-fin">
+          <div class="section">
+            <h4>Juros Simples</h4>
+            <div class="grid-3">
+              <input id="fsP" class="input" type="number" placeholder="Principal">
+              <input id="fsI" class="input" type="number" placeholder="Taxa (%)">
+              <input id="fsN" class="input" type="number" placeholder="Períodos">
+            </div>
+            <div class="controls"><button class="btn" id="fsCalc">Calcular</button><div id="fsOut" class="mono"></div></div>
+          </div>
+          <div class="section">
+            <h4>Juros Compostos</h4>
+            <div class="grid-3">
+              <input id="fcP" class="input" type="number" placeholder="Principal">
+              <input id="fcI" class="input" type="number" placeholder="Taxa (%)">
+              <input id="fcN" class="input" type="number" placeholder="Períodos">
+            </div>
+            <div class="controls"><button class="btn" id="fcCalc">Calcular</button><div id="fcOut" class="mono"></div></div>
+          </div>
+          <div class="section">
+            <h4>Parcela Price</h4>
+            <div class="grid-3">
+              <input id="flP" class="input" type="number" placeholder="Valor">
+              <input id="flI" class="input" type="number" placeholder="Taxa (%)">
+              <input id="flN" class="input" type="number" placeholder="Períodos">
+            </div>
+            <div class="controls"><button class="btn" id="flCalc">Calcular</button><div id="flOut" class="mono"></div></div>
+          </div>
+        </div>
+
+        <!-- Painel histórico -->
+        <div class="panel" id="panel-hist">
+          <div class="section">
+            <h4>Histórico</h4>
+            <div id="history" class="history"></div>
+            <div class="controls">
+              <button class="btn danger" id="clearHist">Limpar histórico</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="section card">
+      <div class="small hint">
+        Dicas: use o teclado (0-9, +, -, *, /, Enter, Backspace, vírgula).  
+        M+, M-, MR, MC controlam a memória. Arraste resultados do histórico para reutilizar.
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="js/script.js" defer></script>
+</body>
+</html>
